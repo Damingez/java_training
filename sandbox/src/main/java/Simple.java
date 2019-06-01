@@ -1,8 +1,7 @@
 public class Simple {
     public static void main (String args[])
     {
-
-        System.out.println("Simplest java program");
+        System.out.println(" The simplest java program");
     }
 
 }

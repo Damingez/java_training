@@ -6,12 +6,24 @@ public class Simple {
     // three functions
 
             hello("Janek");
-    double a= 6;
-    System.out.println("The area of square with side " + a + " is " + area(a) );
+    double x = 7;
+     Square sqa = new Square(x);
+    System.out.println("The area of square with side " + sqa.a + " is " + sqa.area() );
 
-    double b = 8;
+    double y = 9;
 
-    System.out.println("The area of rectangle with sides " + a + " and " + b + " is " + area(a,b) );
+    Rectangle rect = new Rectangle(x, y);
+
+    System.out.println("The area of rectangle with sides " + x + " and " + y + " is " + rect.area() );
+
+
+    Point first = new Point(2,5);
+
+    Point second = new Point(5,9);
+
+    System.out.println( "Distance between two points is " + distance(first,second) + " when using function ");
+    System.out.println("Distance between two points is " + second.distance(first) + " when using method" );
+
   }
 
   public static void hello(String parameter)
@@ -19,14 +31,9 @@ public class Simple {
     System.out.println("Hello " + parameter);
   }
 
-  public static double area (double side)
+  public static double distance (Point one, Point two)
   {
-    return side * side;
-  }
-
-  public static double area (double side1, double side2)
-  {
-    return side1 * side2;
+    return  Math.sqrt((one.x-two.x)*(one.x-two.x)+(one.y-two.y)*(one.y-two.y));
   }
 
 }

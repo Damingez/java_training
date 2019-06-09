@@ -20,31 +20,47 @@ public class ContactTests {
     wd = new FirefoxDriver();
     wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
     wd.get("http://localhost/addressbook/");
+    login("admin", "secret");
   }
 
   @Test
   public void testAddingContact() throws Exception {
 
-    wd.findElement(By.name("user")).clear();
-    wd.findElement(By.name("user")).sendKeys("admin");
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).clear();
-    wd.findElement(By.name("pass")).sendKeys("secret");
-    wd.findElement(By.xpath("//input[@value='Login']")).click();
-    wd.findElement(By.linkText("add new")).click();
+    gotoAddContactPage();
+    fillAddContactForm(new BasicContactData("Magda", "Bec", "48668290314", "magdabec@gmail.com"));
+    submitContactForm();
+  }
+
+  private void submitContactForm() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  private void fillAddContactForm(BasicContactData basicContactData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
-    wd.findElement(By.name("firstname")).sendKeys("Stanislaw");
+    wd.findElement(By.name("firstname")).sendKeys(basicContactData.getFirstname());
     wd.findElement(By.name("lastname")).click();
     wd.findElement(By.name("lastname")).clear();
-    wd.findElement(By.name("lastname")).sendKeys("Skalski");
+    wd.findElement(By.name("lastname")).sendKeys(basicContactData.getSurname());
     wd.findElement(By.name("home")).click();
     wd.findElement(By.name("home")).clear();
-    wd.findElement(By.name("home")).sendKeys("+48607671941");
+    wd.findElement(By.name("home")).sendKeys("+" + basicContactData.getHomeNumber());
     wd.findElement(By.name("email")).click();
     wd.findElement(By.name("email")).clear();
-    wd.findElement(By.name("email")).sendKeys("stachopl@gmail.com");
-    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+    wd.findElement(By.name("email")).sendKeys(basicContactData.getEmail());
+  }
+
+  private void gotoAddContactPage() {
+    wd.findElement(By.linkText("add new")).click();
+  }
+
+  private void login(String login, String password) {
+    wd.findElement(By.name("user")).clear();
+    wd.findElement(By.name("user")).sendKeys(login);
+    wd.findElement(By.name("pass")).click();
+    wd.findElement(By.name("pass")).clear();
+    wd.findElement(By.name("pass")).sendKeys(password);
+    wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
 
   @AfterMethod(alwaysRun = true)

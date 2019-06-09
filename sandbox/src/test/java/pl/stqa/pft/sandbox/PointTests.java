@@ -18,5 +18,6 @@ public class PointTests {
     Assert.assertEquals(p.distance(p2),10.295630140987);
     Assert.assertEquals(p3.distance(p4),8.06225774829855);
 
+
   }
 }

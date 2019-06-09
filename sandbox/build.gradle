@@ -3,7 +3,7 @@ plugins
 		id "java"
 		id "application"
       } 
-mainClassName = "Simple"	
+mainClassName = "pl.stqa.pft.sandbox.Simple"	
 
 repositories {
 	mavenCentral()

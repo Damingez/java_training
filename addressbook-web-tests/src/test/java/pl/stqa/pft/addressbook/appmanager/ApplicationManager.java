@@ -5,7 +5,8 @@ import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import pl.stqa.pft.addressbook.GroupData;
+import pl.stqa.pft.addressbook.model.ContactData;
+import pl.stqa.pft.addressbook.model.GroupData;
 
 import java.util.concurrent.TimeUnit;
 
@@ -29,6 +30,9 @@ public class ApplicationManager {
     wd.findElement(By.name("pass")).sendKeys(password);
     wd.findElement(By.xpath("//input[@value='Login']")).click();
   }
+
+
+
 
   public void returntoGroupPage() {
     wd.findElement(By.linkText("groups")).click();
@@ -87,4 +91,28 @@ public class ApplicationManager {
   public void selectGroup() {
     wd.findElement(By.name("selected[]")).click();
   }
+
+  public void submitContactForm() {
+    wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
+  }
+
+  public void fillAddContactForm(ContactData contactData) {
+    wd.findElement(By.name("firstname")).click();
+    wd.findElement(By.name("firstname")).clear();
+    wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
+    wd.findElement(By.name("lastname")).click();
+    wd.findElement(By.name("lastname")).clear();
+    wd.findElement(By.name("lastname")).sendKeys(contactData.getSurname());
+    wd.findElement(By.name("home")).click();
+    wd.findElement(By.name("home")).clear();
+    wd.findElement(By.name("home")).sendKeys("+" + contactData.getHomeNumber());
+    wd.findElement(By.name("email")).click();
+    wd.findElement(By.name("email")).clear();
+    wd.findElement(By.name("email")).sendKeys(contactData.getEmail());
+  }
+
+  public void gotoAddContactPage() {
+    wd.findElement(By.linkText("add new")).click();
+  }
+
 }

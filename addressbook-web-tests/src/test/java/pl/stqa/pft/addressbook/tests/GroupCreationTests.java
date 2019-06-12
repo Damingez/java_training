@@ -8,11 +8,11 @@ public class GroupCreationTests extends TestBase {
 
   @Test
   public void testGroupCreation() throws Exception {
-    app.gotoGroupPage();
-    app.initGroupCreation();
-    app.fillGroupForm(new GroupData("test0", "needed", "good"));
-    app.submitGroupCreation();
-    app.returntoGroupPage();
+    app.getNavigationHelper().gotoGroupPage();
+    app.getGroupHelper().initGroupCreation();
+    app.getGroupHelper().fillGroupForm(new GroupData("test0", "needed", "good"));
+    app.getGroupHelper().submitGroupCreation();
+    app.getGroupHelper().returntoGroupPage();
   //  wd.findElement(By.linkText("Logout")).click();
   }
 

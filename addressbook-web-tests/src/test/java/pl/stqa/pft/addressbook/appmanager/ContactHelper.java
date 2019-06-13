@@ -21,4 +21,20 @@ public class ContactHelper extends HelperBase {
     type(By.name("email"),contactData.getEmail());
 
   }
+
+  public void initContactRemoval() {
+   click(By.xpath("//input[@value='Delete']"));
+
+  }
+
+  public void selectContact() {
+    click(By.name("selected[]"));
+  }
+
+
+  public void acceptPopup() {
+    wd.switchTo().alert().accept();
+  }
+
+
 }

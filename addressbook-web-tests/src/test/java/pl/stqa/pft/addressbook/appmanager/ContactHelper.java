@@ -2,6 +2,8 @@ package pl.stqa.pft.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 import pl.stqa.pft.addressbook.model.ContactData;
 
 public class ContactHelper extends HelperBase {
@@ -14,11 +16,19 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  public void fillAddContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData, boolean isCreation) {
     type(By.name("firstname"),contactData.getFirstname());
     type(By.name("lastname"),contactData.getSurname());
     type(By.name("home"),contactData.getHomeNumber());
     type(By.name("email"),contactData.getEmail());
+
+    if (isCreation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else
+    {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+    }
+
 
   }
 

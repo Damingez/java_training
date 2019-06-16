@@ -1,8 +1,5 @@
 package pl.stqa.pft.addressbook.appmanager;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoAlertPresentException;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -40,7 +37,7 @@ public class ApplicationManager {
       wd= new InternetExplorerDriver();
     }
 
-    wd.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+    wd.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     groupHelper = new GroupHelper(wd);
     wd.get("http://localhost/addressbook/group.php#");
     navigationHelper = new NavigationHelper(wd);
@@ -54,23 +51,6 @@ public class ApplicationManager {
     contactHelper.wd.quit();
   }
 
-  public boolean isElementPresent(By by) {
-    try {
-      contactHelper.wd.findElement(by);
-      return true;
-    } catch (NoSuchElementException e) {
-      return false;
-    }
-  }
-
-  public boolean isAlertPresent() {
-    try {
-      contactHelper.wd.switchTo().alert();
-      return true;
-    } catch (NoAlertPresentException e) {
-      return false;
-    }
-  }
 
   public GroupHelper getGroupHelper() {
     return groupHelper;
@@ -84,4 +64,6 @@ public class ApplicationManager {
   public ContactHelper getContactHelper() {
     return contactHelper;
   }
+
+
 }

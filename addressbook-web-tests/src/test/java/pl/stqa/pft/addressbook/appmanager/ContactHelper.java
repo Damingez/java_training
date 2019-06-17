@@ -29,7 +29,10 @@ public class ContactHelper extends HelperBase {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
 
+  }
 
+  public void gotoAddContactPage() {
+    click(By.linkText("add new"));
   }
 
   public void initContactRemoval() {
@@ -53,5 +56,16 @@ public class ContactHelper extends HelperBase {
 
   public void submitContactUpdate() {
     click(By.xpath("//div[@id='content']/form/input[22]"));
+  }
+
+  public void createContact(ContactData contact,boolean isCreation) {
+
+    gotoAddContactPage();
+    fillContactForm(contact, isCreation);
+    submitContactForm();
+  }
+
+  public boolean isThereContact() {
+    return isElementPresent(By.name("selected[]"));
   }
 }

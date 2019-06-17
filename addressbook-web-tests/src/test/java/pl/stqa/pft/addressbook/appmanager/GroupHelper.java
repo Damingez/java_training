@@ -18,10 +18,10 @@ public class GroupHelper extends HelperBase {
     click(By.name("submit"));
   }
 
-  public void fillGroupForm(GroupData groupData) {
-    type(By.name("group_name"), groupData.getName());
-    type(By.name("group_header"), groupData.getHeader());
-    type(By.name("group_footer"), groupData.getFooter());
+  public void fillGroupForm(GroupData group) {
+    type(By.name("group_name"), group.getName());
+    type(By.name("group_header"), group.getHeader());
+    type(By.name("group_footer"), group.getFooter());
   }
 
   public void initGroupCreation() {
@@ -46,4 +46,23 @@ public class GroupHelper extends HelperBase {
   }
 
 
+  public boolean isGroupExisting() {
+    return isElementPresent(By.name("selected[]"));
+  }
+
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillGroupForm(group);
+    submitGroupCreation();
+    returntoGroupPage();
+
+  }
 }
+
+ /*
+    initGroupCreation();
+    fillGroupForm(new GroupData("test0", "Emile", "dranskie"));
+    submitGroupCreation();
+    returntoGroupPage();
+
+  */

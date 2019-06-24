@@ -57,6 +57,10 @@ public class GroupHelper extends HelperBase {
     returntoGroupPage();
 
   }
+
+  public int getGroupNumber() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 }
 
  /*

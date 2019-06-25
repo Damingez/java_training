@@ -11,11 +11,12 @@ public class GroupDeletionTests extends TestBase {
   public void testGroupRemoveTests() throws Exception {
 
     app.getNavigationHelper().gotoGroupPage();
-    int before = app.getGroupHelper().getGroupNumber();
+
     if (! app.getGroupHelper().isGroupExisting())
     {
       app.getGroupHelper().createGroup(new GroupData("Franki","Kimonowskie","Januszowe"));
     }
+    int before = app.getGroupHelper().getGroupNumber();
     app.getGroupHelper().selectGroup(before-1);
     app.getGroupHelper().deleteChoosenGroups();
     app.getGroupHelper().returntoGroupPage();

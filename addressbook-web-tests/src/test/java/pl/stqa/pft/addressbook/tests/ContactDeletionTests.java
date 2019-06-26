@@ -23,6 +23,6 @@ public class ContactDeletionTests extends TestBase{
     List<ContactData> after = app.getContactHelper().getContactList();
 
 
-    Assert.assertEquals(after.size(),before.size() - 1);
+    Assert.assertEquals(after.size(),before.size() -1  ); // strange error happens when  before - 1 is set
   }
 }

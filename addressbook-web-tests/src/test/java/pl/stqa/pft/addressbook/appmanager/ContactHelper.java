@@ -52,6 +52,7 @@ public class ContactHelper extends HelperBase {
 
   public void acceptPopup() {
     wd.switchTo().alert().accept();
+    wd.findElement(By.cssSelector("div.msgbox"));
   }
 
 

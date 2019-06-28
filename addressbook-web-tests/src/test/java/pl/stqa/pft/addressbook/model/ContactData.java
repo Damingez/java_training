@@ -3,6 +3,7 @@ package pl.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
+  private final String id;
   private final String firstname;
   private final String surname;
   private final String homeNumber;
@@ -10,11 +11,25 @@ public class ContactData {
   private String group;
 
   public ContactData(String firstname, String surname, String homeNumber, String email, String group) {
+    this.id = null;
     this.firstname = firstname;
     this.surname = surname;
     this.homeNumber = homeNumber;
     this.email = email;
     this.group = group;
+  }
+
+  public ContactData(String id, String firstname, String surname, String homeNumber, String email, String group) {
+    this.id = id;
+    this.firstname = firstname;
+    this.surname = surname;
+    this.homeNumber = homeNumber;
+    this.email = email;
+    this.group = group;
+  }
+
+  public String getId() {
+    return id;
   }
 
   public String getGroup() {
@@ -40,22 +55,25 @@ public class ContactData {
   @Override
   public String toString() {
     return "ContactData{" +
-            "firstname='" + firstname + '\'' +
+            "id='" + id + '\'' +
+            ", firstname='" + firstname + '\'' +
             ", surname='" + surname + '\'' +
             '}';
   }
+
 
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return Objects.equals(firstname, that.firstname) &&
+    return Objects.equals(id, that.id) &&
+            Objects.equals(firstname, that.firstname) &&
             Objects.equals(surname, that.surname);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(firstname, surname);
+    return Objects.hash(id, firstname, surname);
   }
 }

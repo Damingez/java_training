@@ -56,8 +56,9 @@ public class ContactHelper extends HelperBase {
   }
 
 
-  public void initContactModification() {
-    click(By.xpath("//img[@alt='Edit']"));
+  public void initContactModification(int index) {
+//    click(By.xpath("//img[@alt='Edit']"));
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
   }
 
   public void submitContactUpdate() {
@@ -82,13 +83,16 @@ public class ContactHelper extends HelperBase {
   public List<ContactData> getContactList() {
 
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.name("selected[]"));
-    // By.xpath("//tr[3]/td/input")
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+
     for (WebElement element :elements)
     {
-      String name = element.getText();
-      String surname = element.getText();
-      ContactData contact = new ContactData(name,surname,null,null,null);
+
+      List<WebElement> cells =  element.findElements(By.tagName("td"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+
+      ContactData contact = new ContactData(firstname,lastname,null,null,null);
       contacts.add(contact);
     }
 

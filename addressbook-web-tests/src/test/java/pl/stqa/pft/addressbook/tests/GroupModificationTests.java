@@ -33,7 +33,9 @@ public class GroupModificationTests extends TestBase {
      Assert.assertEquals(after.size(),before.size());
 
     before.remove(before.size()-1);
+
     before.add(group);
+
     Assert.assertEquals(new HashSet<Object>(after), new HashSet<Object>(before));
 
   }

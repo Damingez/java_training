@@ -12,7 +12,7 @@ public class ContactModificationTests extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions(){
-    app.getNavigationHelper().goToHomePage();
+    app.goTo().goToHomePage();
 
     if (! app.getContactHelper().isThereContact())
     {
@@ -32,7 +32,7 @@ public class ContactModificationTests extends TestBase {
 
      ContactData contact = new ContactData( before.get(index).getId(), "Krasa", "Pasa", "45607906", "terere@gmail.com", null);
      app.getContactHelper().modifyContact(index, contact);
-     app.getNavigationHelper().goToHomePage();
+     app.goTo().goToHomePage();
 
      List<ContactData> after = app.getContactHelper().getContactList();
      Assert.assertEquals(after.size(),before.size());

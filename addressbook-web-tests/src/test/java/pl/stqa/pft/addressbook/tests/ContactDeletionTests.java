@@ -9,7 +9,7 @@ import java.util.List;
 public class ContactDeletionTests extends TestBase{
 
   public void ensurePreconditions(){
-    app.getNavigationHelper().goToHomePage();
+    app.goTo().goToHomePage();
 
     if (! app.getContactHelper().isThereContact())
     {

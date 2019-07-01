@@ -16,7 +16,8 @@ public class ContactModificationTests extends TestBase {
 
     if (! app.contact().isThereContact())
     {
-      app.contact().create(new ContactData("Julio","Berdys","743534534","please@gmail.com","test1"),true);
+      app.contact().create(new ContactData().withFirstname("Julio").withSurname("Berdys")
+              .withHomeNumber("743534534").withEmail("please@gmail.com").withGroup("test1"),true);
     }
   }
 
@@ -28,7 +29,7 @@ public class ContactModificationTests extends TestBase {
 
      int index = before.size()-1;
 
-     ContactData contact = new ContactData( before.get(index).getId(), "Krasa", "Pasa", "45607906", "terere@gmail.com", null);
+     ContactData contact = new ContactData().withId(before.get(index).getId()).withFirstname("Pablo").withSurname("Krasa").withHomeNumber("45607906").withEmail("terere@gmail.com").withGroup("test1");
      app.contact().modify(index, contact);
      app.goTo().homePage();
 

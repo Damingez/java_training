@@ -108,7 +108,7 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
 
-      ContactData contact = new ContactData(firstname,lastname,null,null,null);
+      ContactData contact = new ContactData().withFirstname(firstname).withSurname(lastname);
       contacts.add(contact);
     }
 

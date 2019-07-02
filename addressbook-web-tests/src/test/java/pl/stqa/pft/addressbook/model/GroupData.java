@@ -29,6 +29,7 @@ public class GroupData {
     return id;
   }
 
+
   public String getName() {
     return name;
   }

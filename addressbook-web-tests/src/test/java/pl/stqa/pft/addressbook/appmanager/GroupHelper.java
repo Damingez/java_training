@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import pl.stqa.pft.addressbook.model.GroupData;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,11 +37,7 @@ public class GroupHelper extends HelperBase {
     click(By.name("delete"));
   }
 
-  public void selectGroup(int index) {
 
-    wd.findElements(By.name("selected[]")).get(index).click();
-
-  }
 
   public void selectGroupById(int id) {
 
@@ -60,9 +55,7 @@ public class GroupHelper extends HelperBase {
   }
 
 
-  public boolean isGroupExisting() {
-    return isElementPresent(By.name("selected[]"));
-  }
+
 
   public void create(GroupData group) {
     initGroupCreation();
@@ -80,12 +73,6 @@ public class GroupHelper extends HelperBase {
     returntoGroupPage();
   }
 
-  public void delete(int index) {
-    selectGroup(index);
-    deleteChoosenGroups();
-    returntoGroupPage();
-  }
-
   public void delete(GroupData group) {
     selectGroupById(group.getId());
     deleteChoosenGroups();
@@ -96,21 +83,9 @@ public class GroupHelper extends HelperBase {
     return wd.findElements(By.name("selected[]")).size();
   }
 
-  public List<GroupData> list() {
-
-    List<GroupData> groups = new ArrayList<GroupData>();
-    List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
-     for (WebElement element :elements)
-     {
-       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")) ;
-       String name = element.getText();
-       GroupData group = new GroupData().withId(id).withName(name);
-       groups.add(group);
-     }
-
-    return groups;
+  public boolean isGroupExisting() {
+    return isElementPresent(By.name("selected[]"));
   }
-
 
   public Set<GroupData> all() {
 

@@ -8,7 +8,9 @@ import org.testng.Assert;
 import pl.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -49,6 +51,10 @@ public class ContactHelper extends HelperBase {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
 
+  private void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
+  }
+
 
   public void acceptPopup() {
     wd.switchTo().alert().accept();
@@ -87,6 +93,14 @@ public class ContactHelper extends HelperBase {
    acceptPopup();
   }
 
+  public void delete(ContactData contact) {
+    selectContactById(contact.getId());
+    initContactRemoval();
+    acceptPopup();
+  }
+
+
+
 
   public boolean isThereContact() {
     return isElementPresent(By.name("selected[]"));
@@ -109,6 +123,26 @@ public class ContactHelper extends HelperBase {
       String firstname = cells.get(2).getText();
 
       ContactData contact = new ContactData().withFirstname(firstname).withSurname(lastname);
+      contacts.add(contact);
+    }
+
+    return contacts;
+
+  }
+
+  public Set<ContactData> all() {
+
+    Set<ContactData> contacts = new HashSet<>();
+    List<WebElement> elements = wd.findElements(By.name("entry"));
+
+    for (WebElement element :elements)
+    {
+
+      List<WebElement> cells =  element.findElements(By.tagName("td"));
+      String lastname = cells.get(1).getText();
+      String firstname = cells.get(2).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value")) ;
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withSurname(lastname);
       contacts.add(contact);
     }
 

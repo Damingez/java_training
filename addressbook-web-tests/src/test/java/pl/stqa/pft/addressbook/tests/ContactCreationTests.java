@@ -22,9 +22,10 @@ public class ContactCreationTests extends TestBase {
     app.contact().create(contact, true);
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
-   // Assert.assertEquals(after.size(), before.size() + 1);
 
-    MatcherAssert.assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
+    MatcherAssert.assertThat(after, equalTo(before.
+            withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
   }
 

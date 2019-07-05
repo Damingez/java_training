@@ -29,7 +29,7 @@ public class ContactModificationTests extends TestBase {
      int index = before.size()-1;
 
      ContactData contact = new ContactData().withId(modifiedContact.getId()).withFirstname("Pablo").withSurname("Krasa").withHomeNumber("45607906").withEmail("terere@gmail.com").withGroup("test1");
-     app.contact().modify(contact.getId(), contact);
+     app.contact().modify(contact);
      app.goTo().homePage();
 
      Set<ContactData> after = app.contact().all();

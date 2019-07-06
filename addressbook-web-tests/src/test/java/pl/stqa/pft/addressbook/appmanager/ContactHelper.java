@@ -101,12 +101,15 @@ public class ContactHelper extends HelperBase {
     String home = wd.findElement(By.name("home")).getAttribute("value");
     String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
     String work = wd.findElement(By.name("work")).getAttribute("value");
-  //  String email = wd.findElement(By.name("")).getAttribute("value");
-  //  String address = wd.findElement(By.name("")).getAttribute("value");
+    String email = wd.findElement(By.name("email")).getAttribute("value");
+    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
+    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
+    //  String address = wd.findElement(By.name("")).getAttribute("value");
  //   String group = wd.findElement(By.name("")).getAttribute("value");
 
     return contact = new ContactData().withFirstname(firstName).withSurname(surName)
-            .withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
+            .withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work)
+            .withEmail(email).withEmail2(email2).withEmail3(email3);
           //  .withEmail(email).withAddress(address).withGroup(group)
   }
 
@@ -155,9 +158,10 @@ public class ContactHelper extends HelperBase {
       String lastname = cells.get(1).getText();
       String firstname = cells.get(2).getText();
       String allPhones = cells.get(5).getText();
+      String allEmails = cells.get(4).getText();
 
       ContactData contact = new ContactData().withId(id).withFirstname(firstname).withSurname(lastname)
-              .withAllPhones(allPhones);
+              .withAllPhones(allPhones).withAllEmails(allEmails);
       contacts.add(contact);
 
     }

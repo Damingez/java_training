@@ -20,6 +20,9 @@ public class ContactCreationTests extends TestBase {
     ContactData contact = new ContactData().withFirstname("Mara").
             withSurname("Timisoara").withHomeNumber("48668290314").withEmail("magdabec@gmail.com").withGroup("test1");
     app.contact().create(contact, true);
+
+
+
     assertThat(app.contact().count(), equalTo(before.size() + 1));
     Contacts after = app.contact().all();
 

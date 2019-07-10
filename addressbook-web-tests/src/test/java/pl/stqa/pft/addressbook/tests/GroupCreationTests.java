@@ -24,11 +24,11 @@ public class GroupCreationTests extends TestBase {
     BufferedReader reader = new BufferedReader(new FileReader( new File("src/test/resources/groups.csv")));
     String line = reader.readLine();
 
-    while (line!=null)
+    while (!line.equals(""))
     {
       String[] split = line.split(";");
       list.add( new  Object[] {new GroupData().withName(split[0]).withHeader(split[1]).withFooter(split[2])});
-
+      line = reader.readLine();
     }
 
     return list.iterator();

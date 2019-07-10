@@ -1,6 +1,6 @@
 package pl.stqa.pft.addressbook.tests;
 
-import org.omg.CORBA.Object;
+
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import pl.stqa.pft.addressbook.model.GroupData;
@@ -35,12 +35,11 @@ public class GroupCreationTests extends TestBase {
   }
 
   @Test (dataProvider = "validGroups")
-  public void testGroupCreation() throws Exception {
+  public void testGroupCreation(GroupData group)  {
     app.goTo().groupPage();
     Groups before = app.group().all();
-
-    GroupData group = new GroupData().withName("test3");
     app.group().create(group);
+
     assertThat(app.group().count(), equalTo(before.size() + 1));
     Groups after = app.group().all();
 

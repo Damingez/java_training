@@ -10,10 +10,10 @@ public class ContactData {
   private  String firstname;
   @Expose
   private  String lastname;
+  @Expose
   private  String homeNumber;
   private  String mobileNumber;
   private  String workNumber;
-  @Expose
   private  String email;
   private  String email2;
   private  String email3;

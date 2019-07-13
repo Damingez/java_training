@@ -1,0 +1,23 @@
+<list>
+  <pl.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>Jara0</firstname>
+    <lastname>Kowal0</lastname>
+    <email>meme0@gmail.com  </email>
+    <group>test 0</group>
+  </pl.stqa.pft.addressbook.model.ContactData>
+  <pl.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>Jara1</firstname>
+    <lastname>Kowal1</lastname>
+    <email>meme1@gmail.com  </email>
+    <group>test 1</group>
+  </pl.stqa.pft.addressbook.model.ContactData>
+  <pl.stqa.pft.addressbook.model.ContactData>
+    <id>2147483647</id>
+    <firstname>Jara2</firstname>
+    <lastname>Kowal2</lastname>
+    <email>meme2@gmail.com  </email>
+    <group>test 2</group>
+  </pl.stqa.pft.addressbook.model.ContactData>
+</list>

@@ -48,6 +48,9 @@ public class ContactData {
   private String allEmails;
    @Transient
   private String allAdresses;
+  @Transient
+
+
 
 
 
@@ -109,6 +112,8 @@ public class ContactData {
   public String getAllAdresses() {
     return allAdresses;
   }
+
+
 
   public ContactData withFirstname(String firstname) {
     this.firstname = firstname;
@@ -184,6 +189,7 @@ public class ContactData {
     this.id = id;
     return this;
   }
+
 
   @Override
   public String toString() {

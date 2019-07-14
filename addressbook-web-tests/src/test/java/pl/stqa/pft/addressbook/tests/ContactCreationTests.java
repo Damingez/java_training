@@ -55,6 +55,7 @@ public class ContactCreationTests extends TestBase {
     MatcherAssert.assertThat(after, equalTo(before.
             withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
 
+
   }
 
 }

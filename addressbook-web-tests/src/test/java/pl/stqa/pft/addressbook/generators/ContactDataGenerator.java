@@ -90,7 +90,8 @@ public class ContactDataGenerator {
               .withFirstname(String.format("Jara%s", i))
               .withSurname(String.format("Kowal%s", i))
               .withHomeNumber(String.format("%s49201", i))
-              .withGroup(String.format("test %s" ,i)));
+       //    .withGroup(String.format("test %s" ,i))
+      );
     }
     return contacts;
   }

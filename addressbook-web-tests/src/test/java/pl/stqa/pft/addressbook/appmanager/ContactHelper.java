@@ -14,15 +14,15 @@ import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
-  public ContactHelper(WebDriver wd) {
+  private ContactHelper(WebDriver wd) {
     super(wd);
   }
 
-  public void submitContactForm() {
+  private void submitContactForm() {
     wd.findElement(By.xpath("(//input[@name='submit'])[2]")).click();
   }
 
-  public void fillContactForm(ContactData contactData, boolean isCreation) {
+  private void fillContactForm(ContactData contactData, boolean isCreation) {
     type(By.name("firstname"),contactData.getFirstname());
     type(By.name("lastname"),contactData.getLastname());
     type(By.name("home"),contactData.getHomeNumber());
@@ -44,34 +44,52 @@ public class ContactHelper extends HelperBase {
 
   }
 
-  public void gotoAddContactPage() {
+  private void gotoAddContactPage() {
     click(By.linkText("add new"));
   }
 
-  public void initContactRemoval() {
+  private void initContactRemoval() {
    click(By.xpath("//input[@value='Delete']"));
 
   }
 
+  public void selectContact() {
+    wd.findElement(By.name("selected[]")).click();
+  }
 
+  public void clickAddToGroup () {
+    wd.findElement(By.name("add")).click();
+  }
+
+  public void clickFirstAvailableGroup() {
+    wd.findElement(By.xpath("//option[3]")).click();
+  }
 
   private void selectContactById(int id) {
     wd.findElement(By.cssSelector("input[value='"+ id +"']")).click();
   }
 
+  public void clickGroupChoiceList() {
+    wd.findElement(By.name("group")).click();
+  }
 
-  public void acceptPopup() {
+  public void clickNoneGroup() {
+    wd.findElement(By.cssSelector("option[value='[none]']")).click();
+  }
+
+
+  private void acceptPopup() {
     wd.switchTo().alert().accept();
     wd.findElement(By.cssSelector("div.msgbox"));
   }
 
 
-  public void clickEditContact(int id) {
+  private void clickEditContact(int id) {
 
     wd.findElement(By.cssSelector("[href='edit.php?id=" + id + "']")).click();
   }
 
-  public void submitContactUpdate() {
+  private void submitContactUpdate() {
     click(By.xpath("//div[@id='content']/form/input[22]"));
   }
 
@@ -180,4 +198,7 @@ public class ContactHelper extends HelperBase {
   }
 
 
+  public void clickRemoveFromGroup() {
+    wd.findElement(By.name("remove")).click();
+  }
 }

@@ -90,7 +90,7 @@ public class GroupCreationTests extends TestBase {
     Groups before = app.db().groups();
     GroupData group = new GroupData().withName("testowo'");
     app.group().create(group);
-    assertThat(app.group().count(), equalTo(before.size()  ));
+    assertThat(app.group().count(), equalTo(before.size() ));
     Groups after = app.db().groups();
     assertThat(after, equalTo(before));
 

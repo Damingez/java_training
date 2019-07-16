@@ -23,8 +23,7 @@ public class ContactModificationTests extends TestBase {
     }
   }
 
-  @Test ()
-
+  @Test
   public void modifyContact()
    {
      Contacts before = app.db().contacts();

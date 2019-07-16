@@ -14,7 +14,7 @@ import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
-  private ContactHelper(WebDriver wd) {
+  public ContactHelper(WebDriver wd) {
     super(wd);
   }
 
@@ -200,5 +200,20 @@ public class ContactHelper extends HelperBase {
 
   public void clickRemoveFromGroup() {
     wd.findElement(By.name("remove")).click();
+  }
+
+  public boolean IsContactWithoutGroupAvailable() {
+
+    if (isElementPresent(By.name("selected[]")))
+    {
+      return true;
+    }
+    else
+      {
+      return false;
+    }
+
+ //
+
   }
 }

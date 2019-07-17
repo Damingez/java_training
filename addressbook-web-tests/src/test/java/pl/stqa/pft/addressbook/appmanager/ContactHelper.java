@@ -131,13 +131,22 @@ public class ContactHelper extends HelperBase {
     String email3 = wd.findElement(By.name("email3")).getAttribute("value");
     String address = wd.findElement(By.name("address")).getAttribute("value");
     String address2 = wd.findElement(By.name("address2")).getAttribute("value");
- //   String group = wd.findElement(By.name("")).getAttribute("value");
+
 
     return contact = new ContactData().withFirstname(firstName).withSurname(surName)
             .withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work)
             .withEmail(email).withEmail2(email2).withEmail3(email3)
             .withAddress(address).withAddress2(address2);
-          //  .withEmail(email).withAddress(address).withGroup(group)
+  }
+
+  public String dataFromDetailsForm(ContactData contactData){
+    detailsViewById(contactData.getId());
+    return wd.findElement(By.id("content")).getText();
+
+  }
+
+  private void detailsViewById(int id) {
+    wd.findElement(By.cssSelector("[href='view.php?id=" + id + "']")).click();
   }
 
   public boolean isThereContact() {
@@ -213,7 +222,7 @@ public class ContactHelper extends HelperBase {
       return false;
     }
 
- //
-
   }
+
+
 }

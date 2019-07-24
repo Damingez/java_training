@@ -42,17 +42,17 @@ public class HttpSession {
   }
 
   private String getTextFrom(CloseableHttpResponse response) throws IOException {
-      try {
-        return EntityUtils.toString(response.getEntity());
-      } finally {
-        response.close();
-      }
-  }
-    public boolean isLoggedInAs (String username) throws IOException {
-      HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
-      CloseableHttpResponse response = httpClient.execute(get);
-      String body = getTextFrom(response);
-      return body.contains(String.format("<span class=\"italic\">%s</span>",username));
+    try {
+      return EntityUtils.toString(response.getEntity());
+    } finally {
+      response.close();
     }
+  }
+  public boolean isLoggedInAs (String username) throws IOException {
+    HttpGet get = new HttpGet(app.getProperty("web.baseUrl") + "/index.php");
+    CloseableHttpResponse response = httpClient.execute(get);
+    String body = getTextFrom(response);
+    return body.contains(String.format("<span class=\"italic\">%s</span>",username));
+  }
 
 }

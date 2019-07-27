@@ -3,10 +3,14 @@ package pl.stqa.pft.mantis.tests;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pl.stqa.pft.mantis.appmanager.HttpSession;
 import pl.stqa.pft.mantis.model.MailMessage;
 import ru.lanwen.verbalregex.VerbalExpression;
 
+import java.io.IOException;
 import java.util.List;
+
+import static org.testng.Assert.assertTrue;
 
 public class ResetPasswordTests extends TestBase {
 
@@ -20,18 +24,23 @@ public class ResetPasswordTests extends TestBase {
   // Logowanie admina + akcje związane z resetem hasła
 
   @Test
-  public void ResetPassword () {
-    String username = app.db().getUsernameFromDb(2);
-    String email = app.db().getUserMailFromDb(2);
-    String newPassword = "qwerty";
+  public void ResetPassword () throws IOException {
+    int user_id = 4;
+    String username = app.db().getUsernameFromDb(user_id);
+    String email = app.db().getUserMailFromDb(user_id);
+    String newPassword = "kowaliksen";
 
     app.ui().loginByUI("administrator","root");
-    app.ui().resetPassword(username);
-    //app.ui().logout();
+    app.ui().resetPasswordByAdmin(username);
+    app.ui().logout();
     List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
-    app.ui().resetPasswordPage(confirmationLink,newPassword);
-    System.out.println(username);
+    app.ui().setNewPasswordPage(confirmationLink,newPassword);
+   // System.out.println(username);
+
+    HttpSession session = app.newSession();
+    assertTrue(session.login(username,newPassword));
+    assertTrue(session.isLoggedInAs(username));
 
   }
 

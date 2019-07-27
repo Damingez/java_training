@@ -18,7 +18,7 @@ public class UIhelper extends HelperBase {
 
   }
 
-  public void resetPassword (String user_name)
+  public void resetPasswordByAdmin(String user_name)
   {
     click(By.cssSelector("[href='/mantisbt-1.2.20/manage_overview_page.php']"));
     click(By.cssSelector("[href='/mantisbt-1.2.20/manage_user_page.php']"));
@@ -26,16 +26,16 @@ public class UIhelper extends HelperBase {
     click(By.cssSelector("input[value='Reset Password']"));
   }
 
-  public void resetPasswordPage (String confirmationLink, String password) {
+  public void setNewPasswordPage(String confirmationLink, String password) {
     wd.get(confirmationLink);
     type(By.name("password"), password);
     type(By.name("password_confirm"), password);
- //   click(By.cssSelector("input[value='Update UserData']"));
+    click(By.cssSelector("input[value='Update User']"));
   }
 
   public void logout ()
   {
     click(By.cssSelector("[href='/mantisbt-1.2.20/logout_page.php']"));
   }
-  //  By.cssSelector("[href='edit.php?id=" + id + "']")
+
 }

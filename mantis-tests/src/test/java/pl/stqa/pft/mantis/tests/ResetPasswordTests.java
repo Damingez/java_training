@@ -6,12 +6,10 @@ import org.testng.annotations.Test;
 import pl.stqa.pft.mantis.model.MailMessage;
 import ru.lanwen.verbalregex.VerbalExpression;
 
-import java.io.IOException;
 import java.util.List;
 
-import static org.testng.Assert.assertTrue;
+public class ResetPasswordTests extends TestBase {
 
-public class RegistrationTest extends TestBase {
 
   @BeforeMethod
   public void startMailServer()
@@ -19,20 +17,28 @@ public class RegistrationTest extends TestBase {
     app.mail().start();
   }
 
+  // Logowanie admina + akcje związane z resetem hasła
+
   @Test
-  public void testRegistration () throws IOException {
-    long now = System.currentTimeMillis();
+  public void ResetPassword () {
+    String username = app.db().getUsernameFromDb(2);
+    String email = app.db().getUserMailFromDb(2);
+    String newPassword = "qwerty";
 
-    String user = String.format("user%s",now);
-    String password = "password";
-    String email = String.format("user%s@localdomain.com",now);
-    app.registration().start(user, email);
-    List<MailMessage> mailMessages = app.mail().waitForMail(2, 10000);
+    app.ui().loginByUI("administrator","root");
+    app.ui().resetPassword(username);
+    //app.ui().logout();
+    List<MailMessage> mailMessages = app.mail().waitForMail(1, 10000);
     String confirmationLink = findConfirmationLink(mailMessages, email);
+    app.ui().resetPasswordPage(confirmationLink,newPassword);
+    System.out.println(username);
 
-    app.registration().finish(confirmationLink, password);
-    assertTrue(app.newSession().login(user,password)) ;
   }
+
+  // wyłapanie właściwego maila plus przejście po linku i zmiana hasła przez użytkownika
+
+  // sprawdzenie czy użytkownik może się zalogować
+
 
   private String findConfirmationLink(List<MailMessage> mailMessages, String email) {
     MailMessage mailMessage = mailMessages.stream().filter((m) -> m.to.equals(email)).findFirst().get();
@@ -42,10 +48,10 @@ public class RegistrationTest extends TestBase {
     return regex.getText(mailMessage.text);
   }
 
-
-  @AfterMethod (alwaysRun = true)
+  @AfterMethod(alwaysRun = true)
   public void stopMailServer()
   {
     app.mail().stop();
   }
+
 }

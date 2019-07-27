@@ -20,6 +20,8 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private UIhelper uiHelper;
+  private DbHelper dbHelper;
 
 
   public ApplicationManager(String browser)  {
@@ -82,6 +84,28 @@ public class ApplicationManager {
     }
     return mailHelper;
   }
+
+    public UIhelper ui()
+    {
+
+      if (uiHelper == null)
+      {
+        uiHelper = new UIhelper(this);
+      }
+      return uiHelper;
+    }
+
+  public DbHelper db()
+  {
+
+    if (dbHelper == null)
+    {
+      dbHelper = new DbHelper();
+    }
+    return dbHelper;
+  }
+
+//  dbHelper = new DbHelper();
 
   public WebDriver getDriver() {
 

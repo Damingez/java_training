@@ -2,7 +2,7 @@
 plugins
 	  {
 		id "java"
-		id  "no.nils.wsdl2java"
+	    id "no.nils.wsdl2java" version "0.10"
       } 
 
 repositories {
@@ -12,11 +12,18 @@ repositories {
 
 dependencies {
 	implementation 'org.testng:testng:6.14.3'
-	classpath 'no.nils:wsdl2java:0.10'
+
 }
 
 
+wsdl2java {
+	generatedWsdlDir = file("src/main/java")  // target directory for generated source coude
+	wsdlDir = file("src/main/resources") // define to support incremental build
+	wsdlsToGenerate = [   //  2d-array of wsdls and cxf-parameters
+						  ['src/main/resources/geoipservice.wsdl']
+	]
 
+}
 
 
 

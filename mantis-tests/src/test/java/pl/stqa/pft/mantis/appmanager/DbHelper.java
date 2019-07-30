@@ -6,7 +6,6 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import pl.stqa.pft.mantis.model.UserData;
-import pl.stqa.pft.mantis.model.Users;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class DbHelper {
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
 
   }
-
+    /*
   public Users users()
   {
     Session session = sessionFactory.openSession();
@@ -37,7 +36,7 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Users(result);
-  }
+  }     */
 
   public String getUsernameFromDb(int id)
   {
@@ -62,6 +61,15 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return result.get(id).getEmail();
+  }
+
+  public int getNumberOfUsers ()
+  {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<UserData> result = session.createQuery( "from UserData where enabled ='1' ").list();
+
+    return result.size();
   }
 
 }

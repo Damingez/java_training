@@ -9,6 +9,7 @@ import ru.lanwen.verbalregex.VerbalExpression;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import static org.testng.Assert.assertTrue;
 
@@ -25,10 +26,18 @@ public class ResetPasswordTests extends TestBase {
 
   @Test
   public void ResetPassword () throws IOException {
-    int user_id = 4;
+
+    Random rand = new Random();
+
+    int amountOfUsers = app.db().getNumberOfUsers();
+    int user_id = rand.nextInt(amountOfUsers);
+    if (user_id == 0)
+    {
+      user_id++;
+    }
     String username = app.db().getUsernameFromDb(user_id);
     String email = app.db().getUserMailFromDb(user_id);
-    String newPassword = "kowaliksen";
+    String newPassword = "kowalix";
 
     app.ui().loginByUI("administrator","root");
     app.ui().resetPasswordByAdmin(username);

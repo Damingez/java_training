@@ -1,19 +1,37 @@
 package pl.stqa.pft.mantis.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.common.collect.ForwardingSet;
 
-public class Users /*extends ForwardingSet <UserData>*/ {
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-  private ArrayList<UserData> delegate;
+// not used class
+public class Users extends ForwardingSet<UserData> {
 
+  private Set<UserData> delegate;
 
-  public Users(List<UserData> users) {
-    this.delegate = new ArrayList<>(users);
+  public Users(Users groups) {
+    this.delegate = new HashSet<UserData>(groups.delegate);
   }
 
+  public Users() {
+    this.delegate = new HashSet<UserData>();
+  }
 
-  public ArrayList<UserData> delegate() {
+  public Users(Collection<UserData> users )  {
+    this.delegate = new HashSet<UserData>(users);
+  }
+
+  @Override
+  protected Set<UserData> delegate() {
     return delegate;
   }
-}
+
+
+  }
+
+
+
+
+

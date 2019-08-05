@@ -1,18 +1,15 @@
 package pl.stqa.pft.mantis.tests;
 
-import biz.futureware.mantis.rpc.soap.client.IssueData;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectLocator;
-import biz.futureware.mantis.rpc.soap.client.MantisConnectPortType;
+import com.google.protobuf.ServiceException;
 import org.openqa.selenium.remote.BrowserType;
+import org.testng.SkipException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pl.stqa.pft.mantis.appmanager.ApplicationManager;
 
-import javax.xml.rpc.ServiceException;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.rmi.RemoteException;
 
 public class TestBase {
@@ -25,7 +22,7 @@ public class TestBase {
   public void setUp() throws Exception {
     app.init();
   //  app.ftp().upload(
-  //          new File("src/test/resources/config_inc.php"),"config_inc.php","config_inc.php.bak");
+  //     new File("src/test/resources/config_inc.php"),"config_inc.php","config_inc.php.bak");
   }
 
   @AfterSuite(alwaysRun = true)
@@ -35,22 +32,17 @@ public class TestBase {
 
   }
 
-
-  public MantisConnectPortType getMantisConnect() throws ServiceException, MalformedURLException, ServiceException {
-    return new MantisConnectLocator()
-            .getMantisConnectPort(new URL("http://localhost/mantisbt-1.2.20/api/soap/mantisconnect.php"));
+  private boolean isIssueOpen(BigInteger issueId) throws RemoteException,  MalformedURLException, javax.xml.rpc.ServiceException {
+    if ((app.soap().getIssueStatus(issueId).equals("closed") || app.soap().getIssueStatus(issueId).equals("resolved"))) {
+      return false;
+    } else return true;
   }
 
-  public boolean isIssueOpen(BigInteger issueID) throws MalformedURLException, ServiceException, RemoteException {
-    IssueData checkedIssue = new IssueData();
-      String issueStatus = "";
-   MantisConnectPortType mc = getMantisConnect();
-   checkedIssue = mc.mc_issue_get("administrator", "root",issueID);
-    checkedIssue.getStatus().toString();
-
-    return false;
+  public void skipIfNotFixed(BigInteger issueId) throws RemoteException, ServiceException, MalformedURLException, javax.xml.rpc.ServiceException {
+    if (isIssueOpen(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
+    }
   }
-
 
   }
 

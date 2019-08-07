@@ -45,7 +45,7 @@ public class RestHelper {
   }
 
   public String getIssueStatus(BigInteger issue_id) throws IOException {
-    return getIssue(issue_id).stream().findFirst().get().getStatus_name();
+    return getIssue(issue_id).stream().findFirst().get().getState_name();
   }
 
 }

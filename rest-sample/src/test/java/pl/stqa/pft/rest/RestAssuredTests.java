@@ -17,7 +17,7 @@ public class RestAssuredTests extends TestBase{
   public void testCreateIssue() throws IOException {
     skipIfNotFixed(bigInteger);
     Set<Issue> oldIssues = app.rest().getIssues();
-    Issue newIssue =  new Issue().withSubject("TestIssue19").withDescription("NewTestIssue19");
+    Issue newIssue =  new Issue().withSubject("TestIssue_kow").withDescription("NewTestIssue_kow");
     app.rest().createIssue(newIssue);
 //    Set<Issue> newIssues = app.rest().getIssues();
 //     oldIssues.add(newIssue.withId(issueId));

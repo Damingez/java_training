@@ -9,7 +9,7 @@ public class Issue {
   private BigInteger id;
   private  String subject;
   private String description;
-  private String status_name;
+  private String state_name;
 
   public BigInteger getId() {
     return id;
@@ -25,8 +25,8 @@ public class Issue {
   }
 
 
-  public String getStatus_name() {
-    return status_name;
+  public String getState_name() {
+    return state_name;
   }
 
   public String getDescription() {
@@ -43,8 +43,8 @@ public class Issue {
     return this;
   }
 
-  public Issue withStatus_name(String status_name) {
-    this.status_name = status_name;
+  public Issue withState_name(String status_name) {
+    this.state_name = status_name;
     return this;
   }
 
@@ -56,11 +56,11 @@ public class Issue {
     return Objects.equals(id, issue.id) &&
             Objects.equals(subject, issue.subject) &&
             Objects.equals(description, issue.description) &&
-            Objects.equals(status_name, issue.status_name);
+            Objects.equals(state_name, issue.state_name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, subject, description, status_name);
+    return Objects.hash(id, subject, description, state_name);
   }
 }

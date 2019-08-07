@@ -1,19 +1,21 @@
 package pl.stqa.pft.rest;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 public class Issue {
 
 
-  private int id;
+  private BigInteger id;
   private  String subject;
   private String description;
+  private String status_name;
 
-  public int getId() {
+  public BigInteger getId() {
     return id;
   }
 
-  public Issue withId(int id) {
+  public Issue withId(BigInteger id) {
     this.id = id;
     return this;
   }
@@ -22,9 +24,9 @@ public class Issue {
     return subject;
   }
 
-  public Issue withSubject(String subject) {
-    this.subject = subject;
-    return this;
+
+  public String getStatus_name() {
+    return status_name;
   }
 
   public String getDescription() {
@@ -36,18 +38,29 @@ public class Issue {
     return this;
   }
 
+  public Issue withSubject(String subject) {
+    this.subject = subject;
+    return this;
+  }
+
+  public Issue withStatus_name(String status_name) {
+    this.status_name = status_name;
+    return this;
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     Issue issue = (Issue) o;
-    return id == issue.id &&
+    return Objects.equals(id, issue.id) &&
             Objects.equals(subject, issue.subject) &&
-            Objects.equals(description, issue.description);
+            Objects.equals(description, issue.description) &&
+            Objects.equals(status_name, issue.status_name);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, subject, description);
+    return Objects.hash(id, subject, description, status_name);
   }
 }
